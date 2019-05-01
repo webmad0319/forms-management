@@ -9,14 +9,24 @@ class ProductForm extends React.Component {
         priceWithTaxes: undefined
     }
 
+    // unified state modifier. Here we pass the event and a key
+    // identifying the part of the state we want to change
     changeFormData(e, key) {
         const newState = {...this.state}
+
+        // here we modify they cloned state key for example newState["author"]
+        // then we assign to it the form component value
         newState[key] = e.target.value
 
+        // here we assign the form input value to its corresponding part
+        // of the state
         this.setState(newState);
     }
 
     collectBookInfo(e) {
+        // this is to prevent the form button to submit the form 
+        // that's the default behaviour, hence to prevent that default behaviour
+        // we have to call preventDefault
         e.preventDefault();
 
         function addTaxes(price) {
@@ -30,6 +40,10 @@ class ProductForm extends React.Component {
             //here you'd call axios.post for example
             // axios.post("localhost:3000/books/new", this.state)
             // console.log(this.state)
+
+            // here we invoke the function passed from App to here
+            // so we can pass the form values stored in the state
+            // to App communicating both App and this component
             this.props.newBook(this.state)
         })
     }

@@ -21,8 +21,12 @@ class App extends React.Component {
   }
 
   addNewBook(newBookDetails) {
+    // here we extract from the state and clone all the books
     var booksIncludingNewBook = [...this.state.books]
+    // adding a new books coming from ProductForm
     booksIncludingNewBook.push(newBookDetails)
+
+    // we re-add in the state all the books including the new one
     this.setState({
       ...this.state,
       books: booksIncludingNewBook
@@ -39,6 +43,8 @@ class App extends React.Component {
           }
         </ul>
         <hr></hr>
+        {/* here we pass via props a function of this current class to its child via the newBook prop */}
+        {/* the state of the form of ProductForms gets passed here */}
         <ProductForm bookShop="fnac callao" newBook={(newBook) => this.addNewBook(newBook)}></ProductForm>
 
         <ProductForm bookShop="puerta de sol" newBook={(newBook) => this.addNewBook(newBook)}></ProductForm>
