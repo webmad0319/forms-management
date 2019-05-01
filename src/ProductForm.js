@@ -29,13 +29,15 @@ class ProductForm extends React.Component {
         }, function () {
             //here you'd call axios.post for example
             // axios.post("localhost:3000/books/new", this.state)
-            console.log(this.state)
+            // console.log(this.state)
+            this.props.newBook(this.state)
         })
     }
 
     render() {
         return (
             <form className="product-form">
+                <h1>Your shop is {this.props.bookShop}</h1>
                 <label>Book name: </label>
                 <input 
                     type="text" 
