@@ -9,29 +9,11 @@ class ProductForm extends React.Component {
         priceWithTaxes: undefined
     }
 
-    changeBookName(e) {
-        const theBookName = e.target.value
+    changeFormData(e, key) {
+        const newState = {...this.state}
+        newState[key] = e.target.value
 
-        this.setState({
-            ...this.state,
-            name: theBookName
-        })
-    }
-    changeAuthorName(e) {
-        const theAuthorName = e.target.value
-
-        this.setState({
-            ...this.state,
-            author: theAuthorName
-        })
-    }
-    changePrice(e) {
-        const theNewPrice = e.target.value
-
-        this.setState({
-            ...this.state,
-            price: theNewPrice
-        })
+        this.setState(newState);
     }
 
     collectBookInfo(e) {
@@ -45,6 +27,8 @@ class ProductForm extends React.Component {
             ...this.state,
             priceWithTaxes: addTaxes(this.state.price)
         }, function () {
+            //here you'd call axios.post for example
+            // axios.post("localhost:3000/books/new", this.state)
             console.log(this.state)
         })
     }
@@ -58,21 +42,21 @@ class ProductForm extends React.Component {
                     name="name" 
                     placeholder="write a name"
                     value={this.state.name} 
-                    onChange={(e) => this.changeBookName(e)} />
+                    onChange={(e) => this.changeFormData(e, 'name')} />
 
                 <label>Book author: </label>
                 <input 
                     type="text" 
                     name="author" 
                     value={this.state.author} 
-                    onChange={(e) => this.changeAuthorName(e)} />
+                    onChange={(e) => this.changeFormData(e, 'author')} />
 
                 <label>Book price: </label>
                 <input 
                     type="text" 
                     name="price" 
                     value={this.state.price} 
-                    onChange={(e) => this.changePrice(e)} />
+                    onChange={(e) => this.changeFormData(e, 'price')} />
 
                 <button onClick={(e) => this.collectBookInfo(e)}>Collect book info!</button>
 
